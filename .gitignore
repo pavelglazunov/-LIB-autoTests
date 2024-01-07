@@ -15,3 +15,13 @@ venv
 .idea
 
 project.py
+
+
+./auto_tests/__pycache__/
+/auto_tests/__pycache__/
+auto_tests/__pycache__/
+
+
+./auto_tests/__pycache__
+/auto_tests/__pycache__
+auto_tests/__pycache__
