@@ -61,7 +61,7 @@ def _run_code(test: formats.Test, test_id: int, add_timer: bool):
     result = subprocess.run(["python", new_file_path], capture_output=True, text=True)
     end_time = time.time()
 
-    exec_time = f"{format(end_time - start_time, '.6f')} ms" if add_timer else ""
+    exec_time = f"[{format(end_time - start_time, '.6f')} ms]" if add_timer else ""
     test_completed = True
     if result.stderr:
         status = "*"
@@ -69,17 +69,16 @@ def _run_code(test: formats.Test, test_id: int, add_timer: bool):
         status = "+" if (test_completed := _compare_answer(result.stdout, test_answer)) else "-"
 
     if result.stderr:
-        print(f"[{status}] [test {test_id}] [{exec_time}] failed (executable error)")
+        print(f"[{status}] [test {test_id}] {exec_time} failed (executable error)")
         print(result.stderr)
     elif test_answer is None:
-        print(f"[{status}] [test {test_id}] [{exec_time}] finished")
+        print(f"[{status}] [test {test_id}] {exec_time} finished")
         print(result.stdout)
     else:
         if test_completed:
-            print(f"[{status}] [test {test_id}] [{exec_time}] completed")
-            # print(result.stdout)
+            print(f"[{status}] [test {test_id}] {exec_time} completed")
         else:
-            print(f"[{status}] [test {test_id}] [{exec_time}] failed (incorrect answer)")
+            print(f"[{status}] [test {test_id}] {exec_time} failed (incorrect answer)")
             print("program output:")
             print(result.stdout)
             print("correct answer:")
