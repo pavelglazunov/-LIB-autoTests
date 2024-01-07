@@ -8,14 +8,6 @@ import os
 from auto_tests import formats
 
 
-def input() -> str:
-    """
-    if you need python input use base_input()
-    :return str object with test value
-    """
-    return ""
-
-
 def _generate_file(current_data):
     stack = inspect.stack()
 
@@ -96,14 +88,6 @@ def _run_code(test: formats.Test, test_id: int, add_timer: bool):
 
 
 def _to_format(data) -> tuple[formats.Format, formats.Format]:
-    """
-    Возвращает форматированный тест и форматированный ответ
-    если ответ не установлен, возвращается formats.NullAnswer().
-
-    :param data: any
-    :return: первое значение - форматированный тест
-             второе значение - форматированный ответ
-    """
     if isinstance(data, list) or isinstance(data, tuple):
         return formats.Array(data), formats.NullAnswer()
     elif isinstance(data, str):
